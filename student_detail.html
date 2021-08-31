@@ -1,0 +1,33 @@
+{% extends 'website/base.html' %}
+
+{% block title %}{{ student.name }}{% endblock %}
+
+
+{% block content %}
+    <div id="heading">
+        <h3>{{ student.name }}</h3>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-12 col-lg-12" style="margin-bottom: 3%">
+        {% if student.picture %}
+            <img src="{{ student.picture.url }}" id="me" class="img-responsive">
+        {% else %}
+            <img src="http://www.priorlakeassociation.org/wp-content/uploads/2011/06/blank-profile.png" id="me" class="img-responsive">
+        {% endif %}
+    </div>
+    <div style="margin-top: 3%;" class="col-xs-8 col-lg-12 col-sm-8 col-md-12">
+        <p><strong>Name: </strong>{{ student.name }}</p>
+        <p><strong>Date of Birth: </strong>{{ student.dob }}</p>
+        <p><strong>Year: </strong>{{ student.year }}</p>
+        <p><strong>Interests: </strong>{{ student.interests }}</p>
+        <p><strong>House: </strong>{{ student.house.name }}</p>
+        <p><strong>Subjects Opted: </strong>
+            {% for subject in student.subjects.all %}
+                {{ subject }}
+                {% if student.subjects.all.count > 1 %}
+                    ,
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p><strong>About {{ student.name }}: </strong>{{ student.description }}</p>
+    </div>
+{% endblock %}
